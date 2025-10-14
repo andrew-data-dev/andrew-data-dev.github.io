@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>andrew jacobson</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on andrew jacobson</description>
+    <generator>Hugo -- 0.151.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>trail camera photos analyzer 🦌</title>
+      <link>http://localhost:1313/projects/trailcam-photo-analyzer/</link>
+      <pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/trailcam-photo-analyzer/</guid>
+      <description>A simple web app that retrieves weather data from uploaded trail camera photos to help identify optimal hunting conditions.</description>
+    </item>
+    <item>
+      <title>hello, world!</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Fri, 10 Oct 2025 15:09:53 -0500</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>&lt;p&gt;Welcome to my new portfolio! I needed a way to showcase my projects and talk about the fun things I&amp;rsquo;m working on.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve previously used the Django web framework with AWS to host my personal portfolio, but this time I wanted something faster and more content-focused. This site is powered by &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; and hosted on &lt;a href=&#34;https://pages.github.com&#34;&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
