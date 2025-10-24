@@ -27,13 +27,19 @@ pagerSize = 5
   weight = 1
 
   [[menu.main]]
-  identifier = "projects"
-  name = "projects"
-  url = "/projects/"
+  identifier = "personal projects"
+  name = "personal projects"
+  url = "/personal_projects/"
   weight = 2
+
+  [[menu.main]]
+  identifier = "work projects"
+  name = "work projects"
+  url = "/work_projects/"
+  weight = 3  
 
   [[menu.main]]
   identifier = "posts"
   name = "posts"
   url = "/posts/"
-  weight = 3
+  weight = 4
