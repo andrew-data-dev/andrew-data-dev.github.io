@@ -133,11 +133,13 @@
 
 </div>
   </header> 
-  <div class="post-content"><p>Built in 2022</p>
+  <div class="post-content"><p>In early 2022, when <strong><a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a></strong> had just exploded in popularity, I built a small web app to help me improve my game. Initially, I rationalized that the functionality it provided was no different than jotting information down on paper, which I&rsquo;ll admit was flawed logic, as it still gave me a clear advantage. Since it&rsquo;s all just for fun, it wasn&rsquo;t a big deal. The real outcome was that I went from averaging four guesses to consistently solving puzzles in three. I only used my Wordle helper for a bit, nowadays I solve it without any help!</p>
+<p>The app consisted of a single page (screenshot below) where I could search any word to see if it had been a previous Wordle answer. I also added a pattern-matching feature—if I knew the word started with &ldquo;TR&rdquo;, for example, I could enter those letters in the first two boxes and it would return all previous answers matching that pattern, helping me avoid guessing words that had already been answers.</p>
+<p>In addition to the word search features, I added letter frequency distribution charts that displayed the top 15 most common letters for each position (1 through 5) based on all previous Wordle answers. For the longest time, my starter word was CRANE, because it aligned well with the highest frequency letters in each position (until it eventually became an answer itself).</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: center"><img alt="main page" loading="lazy" src="/personal_projects/wordle-helper/wordle-helper.png"></th>
+          <th style="text-align: center"><img alt="main page" loading="lazy" src="wordle-helper.png"></th>
       </tr>
   </thead>
   <tbody>
@@ -149,7 +151,7 @@
 <table>
   <thead>
       <tr>
-          <th style="text-align: center"><img alt="example of a word being checked" loading="lazy" src="/personal_projects/wordle-helper/word-checker.jpg"></th>
+          <th style="text-align: center"><img alt="example of a word being checked" loading="lazy" src="word-checker.jpg"></th>
       </tr>
   </thead>
   <tbody>
@@ -158,6 +160,8 @@
       </tr>
   </tbody>
 </table>
+<p>Initially, I manually added each day&rsquo;s answer to the database, but I eventually automated the process. I set up a cron job to run a Python script that scraped a website containing Wordle answers. Every night, it would retrieve the previous day&rsquo;s answer and update the database automatically.</p>
+<p>Overall, this was just a fun little project that combined my love of coding, data analysis, and Wordle.</p>
 
 
   </div>
@@ -171,10 +175,10 @@
       <li><a href="http://localhost:1313/tags/web-scraping/">Web Scraping</a></li>
     </ul>
 <nav class="paginav">
-  <a class="next" href="http://localhost:1313/personal_projects/job-site-scraper/">
+  <a class="next" href="http://localhost:1313/personal_projects/wordlist-generator/">
     <span class="title">Next »</span>
     <br>
-    <span>job site scraper 🔎</span>
+    <span>password generator &amp; wi-fi hacking 🛜</span>
   </a>
 </nav>
 

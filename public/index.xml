@@ -17,6 +17,13 @@
 &lt;p&gt;I&amp;rsquo;ve previously used the Django web framework with AWS to host my personal portfolio, but this time I wanted something faster and more content-focused. This site is powered by &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; and hosted on &lt;a href=&#34;https://pages.github.com&#34;&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>wordle helper 🟩⬛⬛🟨🟨</title>
+      <link>http://localhost:1313/personal_projects/wordle-helper/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/personal_projects/wordle-helper/</guid>
+      <description>A web app that lets you verify whether a word has appeared as a Wordle answer and displays letter frequency distributions for each of the five positions in Wordle words.</description>
+    </item>
+    <item>
       <title>password generator &amp; wi-fi hacking 🛜</title>
       <link>http://localhost:1313/personal_projects/wordlist-generator/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
