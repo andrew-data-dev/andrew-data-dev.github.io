@@ -5,7 +5,7 @@ summary: "A web app that lets you verify whether a word has appeared as a Wordle
 tags: ["Personal", "Web Development", "Django", "Python", "Web Scraping"]
 ---
 
-In early 2022, when **[Wordle](https://www.nytimes.com/games/wordle/index.html)** had just exploded in popularity, I built a small web app to help me improve my game. Initially, I rationalized that the functionality it provided was no different than jotting information down on paper, which I'll admit was flawed logic, as it still gave me a clear advantage. Since it's all just for fun, it wasn't a big deal. The real outcome was that I went from averaging four guesses to consistently solving puzzles in three. I only used my Wordle helper for a bit, nowadays I solve it without any help!
+In early 2022, when **[Wordle](https://www.nytimes.com/games/wordle/index.html)** was exploding in popularity, I built a small web app to help me improve my game. Initially, I rationalized that the functionality it provided was no different than jotting information down on paper, which I'll admit was flawed logic, as it still gave me a clear advantage. Since it's all just for fun, it wasn't a big deal. The real outcome was that I went from averaging four guesses to consistently solving puzzles in three. I only used my Wordle helper for a bit, nowadays I solve it without any help!
 
 The app consisted of a single page (screenshot below) where I could search any word to see if it had been a previous Wordle answer. I also added a pattern-matching feature—if I knew the word started with "TR", for example, I could enter those letters in the first two boxes and it would return all previous answers matching that pattern, helping me avoid guessing words that had already been answers.
 
