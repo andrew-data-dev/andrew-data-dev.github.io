@@ -1,6 +1,6 @@
 ---
 title: "password generator & wi-fi hacking 🛜"
-date: 2021-11-01
+weight: 995
 summary: "A network security learning project using Kali Linux and a custom Python password generator."
 tags: ["Personal", "Python", "Hacking"]
 ---

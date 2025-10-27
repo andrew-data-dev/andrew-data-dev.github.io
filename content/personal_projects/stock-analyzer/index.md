@@ -1,6 +1,6 @@
 ---
 title: "stock tracker & analyzer 📈"
-date: 2020-08-01
+weight: 998
 summary: "A stock tracking web app that analyzes performance and suggests when to buy, sell, or hold."
 tags: ["Personal", "Web Development", "Django", "Python", "Data"]
 ---

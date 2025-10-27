@@ -1,6 +1,6 @@
 ---
 title: "trail camera photos analyzer 🦌"
-date: 2015-08-01
+weight: 1000
 summary: "A simple web app that retrieves weather data from uploaded trail camera photos to help identify optimal hunting conditions."
 tags: ["Personal", "Web Development", "PHP", "JavaScript", "API"]
 ---

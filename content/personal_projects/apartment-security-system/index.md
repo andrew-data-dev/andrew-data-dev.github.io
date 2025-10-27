@@ -1,6 +1,6 @@
 ---
 title: "apartment security system 🚨"
-date: 2020-07-01
+weight: 999
 summary: "A LAMP stack web app that connected a wireless sensor and Raspberry Pi to monitor our apartment's front door and provide alarm notifications."
 tags: ["Personal", "Web Development", "Python", "Raspberry Pi", "API"]
 ---

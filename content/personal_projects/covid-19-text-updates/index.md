@@ -1,6 +1,6 @@
 ---
 title: "covid 19 text update program 😷"
-date: 2020-08-01
+weight: 997
 summary: "A Django-based web app where users can subscribe to COVID-19 text alerts tailored to their state and county. Developed as part of a graduate mobile health course."
 tags: ["Personal", "Web Development", "Django", "Python", "API", "Data"]
 ---
