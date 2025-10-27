@@ -1,7 +1,7 @@
 ---
 title: "job site scraper 🔎"
 date: 2021-12-01
-summary: "Test"
+summary: "A simple web scraping solution for tracking job postings from organizations that don't offer email alerts."
 tags: ["Personal", "Web Development", "Python", "Web Scraping"]
 ---
 
