@@ -2,7 +2,7 @@
 title: "wordle helper 🟩⬛⬛🟨🟨"
 date: 2022-02-01
 summary: "A web app that lets you verify whether a word has appeared as a Wordle answer and displays letter frequency distributions for each of the five positions in Wordle words."
-tags: ["Personal", "Web Development", "Django", "Python", "Web scraping"]
+tags: ["Personal", "Web Development", "Django", "Python", "Web Scraping"]
 ---
 
 In early 2022, when **[Wordle](https://www.nytimes.com/games/wordle/index.html)** had just exploded in popularity, I built a small web app to help me improve my game. Initially, I rationalized that the functionality it provided was no different than jotting information down on paper, which I'll admit was flawed logic, as it still gave me a clear advantage. Since it's all just for fun, it wasn't a big deal. The real outcome was that I went from averaging four guesses to consistently solving puzzles in three. I only used my Wordle helper for a bit, nowadays I solve it without any help!

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
 <title>job site scraper 🔎 | andrew jacobson</title>
-<meta name="keywords" content="Personal, Web Development, Python">
+<meta name="keywords" content="Personal, Web Development, Python, Web Scraping">
 <meta name="description" content="Test">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/personal_projects/job-site-scraper/">
@@ -133,8 +133,212 @@
 
 </div>
   </header> 
-  <div class="post-content"><p>Built in 2020&hellip;</p>
-
+  <div class="post-content"><p>At the end of 2021, while searching for a new position, I wanted to be notified of new job postings at a few specific organizations. Unfortunately, these organizations didn&rsquo;t offer job alert subscriptions, they simply had web pages listing their openings.</p>
+<p>I created two separate scripts &ndash; one for each job site &ndash; primarily because the pages had different structures that required unique scraping logic. A future improvement would be consolidating everything into a single script, but my solution accomplished what I needed: it scraped the job websites every morning and emailed me the job title, description, and a direct link to each position.</p>
+<p>I&rsquo;ve included the code for one of the scripts below. It didn&rsquo;t seem substantial enough to warrant creating a dedicated GitHub repo!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> smtplib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ssl
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> datetime
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> psycopg2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This method logs in to Google SMTP server and sends an email.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Accepts a string parameter for the email message.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_email</span>(message, recipient):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Set up email connection</span>
+</span></span><span style="display:flex;"><span>    port <span style="color:#f92672">=</span> smtp_port
+</span></span><span style="display:flex;"><span>    smtp_server <span style="color:#f92672">=</span> smtp_server_name
+</span></span><span style="display:flex;"><span>    sender_email <span style="color:#f92672">=</span> my_email
+</span></span><span style="display:flex;"><span>    receiver_email <span style="color:#f92672">=</span> recipient
+</span></span><span style="display:flex;"><span>    password <span style="color:#f92672">=</span> password
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># SSL context</span>
+</span></span><span style="display:flex;"><span>    context <span style="color:#f92672">=</span> ssl<span style="color:#f92672">.</span>create_default_context()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Log in and send email</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> smtplib<span style="color:#f92672">.</span>SMTP_SSL(smtp_server, port, context<span style="color:#f92672">=</span>context) <span style="color:#66d9ef">as</span> server:
+</span></span><span style="display:flex;"><span>        server<span style="color:#f92672">.</span>login(sender_email, password)
+</span></span><span style="display:flex;"><span>        server<span style="color:#f92672">.</span>sendmail(sender_email, receiver_email, message)
+</span></span><span style="display:flex;"><span>        server<span style="color:#f92672">.</span>quit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Open a connection to the specified database and return that connection</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">connect_to_db</span>():
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    db_connection <span style="color:#f92672">=</span> psycopg2<span style="color:#f92672">.</span>connect(
+</span></span><span style="display:flex;"><span>        host<span style="color:#f92672">=</span>host_name,
+</span></span><span style="display:flex;"><span>        port<span style="color:#f92672">=</span>port,
+</span></span><span style="display:flex;"><span>        database<span style="color:#f92672">=</span>database_name,
+</span></span><span style="display:flex;"><span>        user<span style="color:#f92672">=</span>username,
+</span></span><span style="display:flex;"><span>        password<span style="color:#f92672">=</span>password
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> db_connection
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MAIN LOGIC #</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Current date</span>
+</span></span><span style="display:flex;"><span>today <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>date<span style="color:#f92672">.</span>today()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;&gt;&gt;&gt; Looking up jobs for&#34;</span>, today)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List to hold job listings</span>
+</span></span><span style="display:flex;"><span>job_listings <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Dictionary to hold jobs in memory</span>
+</span></span><span style="display:flex;"><span>job_dict <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Queries for staff jobs that contain the keywords</span>
+</span></span><span style="display:flex;"><span>url_queries <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;https://www.somejobsite.com/postings/search?utf8=</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">2%9C%93&amp;query=network&amp;query_v0_posted_at_date=&amp;query_position_type_id%5B%5D=1&amp;commit=Search&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#e6db74">&#34;https://www.somejobsite.com/postings/search?utf8=</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">2%9C%93&amp;query=cyber&amp;query_v0_posted_at_date=&amp;query_position_type_id%5B%5D=1&amp;commit=Search&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#e6db74">&#34;https://www.somejobsite.com/postings/search?utf8=</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">2%9C%93&amp;query=AWS&amp;query_v0_posted_at_date=&amp;query_position_type_id%5B%5D=1&amp;commit=Search&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#e6db74">&#34;https://www.somejobsite.com/postings/search?utf8=</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">2%9C%93&amp;query=cloud&amp;query_v0_posted_at_date=&amp;query_position_type_id%5B%5D=1&amp;commit=Search&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through queries</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> url_query <span style="color:#f92672">in</span> url_queries:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Use &#39;requests&#39; to retrieve web page</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        webpage <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url_query)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> error:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Failed to request URL&#34;</span>, error)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Craft error email</span>
+</span></span><span style="display:flex;"><span>        subject <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Jobs Update Error&#34;</span>
+</span></span><span style="display:flex;"><span>        message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Subject: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">Error requesting a URL. See log.&#34;</span><span style="color:#f92672">.</span>format(subject)
+</span></span><span style="display:flex;"><span>        recipient_email <span style="color:#f92672">=</span> my_email
+</span></span><span style="display:flex;"><span>        send_email(message, recipient_email)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Stop running script</span>
+</span></span><span style="display:flex;"><span>        exit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create BeautifulSoup html parser object</span>
+</span></span><span style="display:flex;"><span>    bsoup <span style="color:#f92672">=</span> BeautifulSoup(webpage<span style="color:#f92672">.</span>content, <span style="color:#e6db74">&#34;html.parser&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get the section of the page that has the job listings</span>
+</span></span><span style="display:flex;"><span>    job_listings <span style="color:#f92672">+=</span> bsoup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;div&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;job-item job-item-posting&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Iterate through the job listings</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> job_listing <span style="color:#f92672">in</span> job_listings:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Retrieve job title from: &lt;div class=&#34;job-item job-item-posting&#34; data-posting-title=&#34;Communications Technician&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        job_title <span style="color:#f92672">=</span> job_listing<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;data-posting-title&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Retrieve job description from: &lt;span class=&#34;job-description&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        job_description <span style="color:#f92672">=</span> job_listing<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;span&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;job-description&#34;</span>)<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Retrieve the job&#39;s links from: &lt;span class=&#34;job-actions&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        job_urls <span style="color:#f92672">=</span> job_listing<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;span&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;job-actions&#34;</span>)<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;a&#34;</span>, href<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Extract the first link from the job urls and create the link for the job&#39;s page</span>
+</span></span><span style="display:flex;"><span>        job_page <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://www.somejobsite.com&#34;</span> <span style="color:#f92672">+</span> job_urls[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#34;href&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Retrieve the details of the job from: &lt;div class=&#34;col-md-2 col-xs-12 job-title job-title-text-wrap col-md-push-2&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        job_details <span style="color:#f92672">=</span> job_listing<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;div&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col-md-2 col-xs-12 job-title job-title-text-wrap col-md-push-2&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Extract the associate job details</span>
+</span></span><span style="display:flex;"><span>        posting_date <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>        job_number <span style="color:#f92672">=</span> int(job_details[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>strip())
+</span></span><span style="display:flex;"><span>        department <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Add the job to the in-memory dictionary</span>
+</span></span><span style="display:flex;"><span>        job_dict[job_number] <span style="color:#f92672">=</span> [job_title, posting_date, department, job_page, job_description]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Wait 20 seconds</span>
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if job is old/new and update database accordingly</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connect to database and create cursor</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    db_connection <span style="color:#f92672">=</span> connect_to_db()
+</span></span><span style="display:flex;"><span>    db_cursor <span style="color:#f92672">=</span> db_connection<span style="color:#f92672">.</span>cursor()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> (<span style="color:#a6e22e">Exception</span>, psycopg2<span style="color:#f92672">.</span>Error) <span style="color:#66d9ef">as</span> error:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Failed to connect to database&#34;</span>, error)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the insert query</span>
+</span></span><span style="display:flex;"><span>db_insert_query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34; INSERT INTO job_posting (N_JOB, D_ADDED, T_TITLE, D_POSTED, T_DEPARTMENT, U_PAGE, T_DESCRIPTION) VALUES (</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">) &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the query used to check if the record already exists</span>
+</span></span><span style="display:flex;"><span>db_select_check_query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34; SELECT 1 FROM job_posting WHERE N_JOB = </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Copy job dictionary to a separate list for emails</span>
+</span></span><span style="display:flex;"><span>job_dict_to_email <span style="color:#f92672">=</span> job_dict<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through the scraped jobs</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> job, job_details <span style="color:#f92672">in</span> job_dict<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Check if job already exists in the database - the brackets are</span>
+</span></span><span style="display:flex;"><span>    db_cursor<span style="color:#f92672">.</span>execute(db_select_check_query, [job])
+</span></span><span style="display:flex;"><span>    db_row <span style="color:#f92672">=</span> db_cursor<span style="color:#f92672">.</span>fetchone()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If the record exists, remove the job listing from the dictionary to email</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> db_row <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Remove job from the email dictionary</span>
+</span></span><span style="display:flex;"><span>        job_dict_to_email<span style="color:#f92672">.</span>pop(job)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Else, add the record to the database</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Assign job information to variables for columns</span>
+</span></span><span style="display:flex;"><span>        n_job <span style="color:#f92672">=</span> job
+</span></span><span style="display:flex;"><span>        d_added <span style="color:#f92672">=</span> today
+</span></span><span style="display:flex;"><span>        t_title <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        d_posted <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        t_department <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        u_page <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>        t_description <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Create insert record</span>
+</span></span><span style="display:flex;"><span>        db_insert_record <span style="color:#f92672">=</span> (n_job, d_added, t_title, d_posted, t_department, u_page, t_description)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Insert the record</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            db_cursor<span style="color:#f92672">.</span>execute(db_insert_query, db_insert_record)
+</span></span><span style="display:flex;"><span>            db_connection<span style="color:#f92672">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> (<span style="color:#a6e22e">Exception</span>, psycopg2<span style="color:#f92672">.</span>Error) <span style="color:#66d9ef">as</span> error:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Failed to insert record&#34;</span>, error)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disconnect from the database</span>
+</span></span><span style="display:flex;"><span>db_connection<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If the email dictionary has content, send email for remaining jobs</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> job_dict_to_email:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Craft email</span>
+</span></span><span style="display:flex;"><span>    subject <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Jobs Update &#34;</span> <span style="color:#f92672">+</span> str(today)
+</span></span><span style="display:flex;"><span>    recipient_email <span style="color:#f92672">=</span> my_email
+</span></span><span style="display:flex;"><span>    message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Subject: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(subject)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Build message from job dictionary</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> job, job_details <span style="color:#f92672">in</span> job_dict_to_email<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        title <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        posted <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        department <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        page_url <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>        description <span style="color:#f92672">=</span> job_details[<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        line <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;[</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">] for </span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">------------------------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n\n\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(title, department, description, page_url)
+</span></span><span style="display:flex;"><span>        message <span style="color:#f92672">+=</span> line
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create message content with subject and the newly crafted body</span>
+</span></span><span style="display:flex;"><span>    message <span style="color:#f92672">=</span> message<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Call function to send email</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Sending email for&#34;</span>, today, <span style="color:#e6db74">&#34;with&#34;</span>, len(job_dict_to_email), <span style="color:#e6db74">&#34;job postings&#34;</span>)
+</span></span><span style="display:flex;"><span>    send_email(message, recipient_email)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Email sent&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Else, do nothing</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Nothing to email for&#34;</span>, today)
+</span></span></code></pre></div>
 
   </div>
 
@@ -143,8 +347,14 @@
       <li><a href="http://localhost:1313/tags/personal/">Personal</a></li>
       <li><a href="http://localhost:1313/tags/web-development/">Web Development</a></li>
       <li><a href="http://localhost:1313/tags/python/">Python</a></li>
+      <li><a href="http://localhost:1313/tags/web-scraping/">Web Scraping</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="http://localhost:1313/personal_projects/wordle-helper/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>wordle helper 🟩⬛⬛🟨🟨</span>
+  </a>
   <a class="next" href="http://localhost:1313/personal_projects/wordlist-generator/">
     <span class="title">Next »</span>
     <br>

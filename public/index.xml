@@ -24,6 +24,13 @@
       <description>A web app that lets you verify whether a word has appeared as a Wordle answer and displays letter frequency distributions for each of the five positions in Wordle words.</description>
     </item>
     <item>
+      <title>job site scraper 🔎</title>
+      <link>http://localhost:1313/personal_projects/job-site-scraper/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/personal_projects/job-site-scraper/</guid>
+      <description>Test</description>
+    </item>
+    <item>
       <title>password generator &amp; wi-fi hacking 🛜</title>
       <link>http://localhost:1313/personal_projects/wordlist-generator/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
