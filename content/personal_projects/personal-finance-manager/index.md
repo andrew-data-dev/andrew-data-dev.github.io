@@ -1,7 +1,7 @@
 ---
 title: "personal finance manager 💸"
 date: 2021-03-01
-summary: "Test"
+summary: "A personal finance dashboard to track household assets, debts, and net worth trends over time."
 tags: ["Personal", "Web Development", "Django", "Python", "Data"]
 ---
 
