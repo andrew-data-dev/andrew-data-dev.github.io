@@ -6,21 +6,27 @@
     <description>Recent content in Data on andrew jacobson</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/data/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>stock tracker &amp; analyzer 📈</title>
-      <link>http://localhost:1313/personal_projects/stock-analyzer/</link>
-      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/personal_projects/stock-analyzer/</guid>
-      <description>A stock tracking web app that analyzes performance and suggests when to buy, sell, or hold.</description>
+      <title>personal finance manager 💸</title>
+      <link>http://localhost:1313/personal_projects/personal-finance-manager/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/personal_projects/personal-finance-manager/</guid>
+      <description>A personal finance dashboard to track household assets, debts, and net worth trends over time.</description>
     </item>
     <item>
       <title>covid 19 text update program 😷</title>
       <link>http://localhost:1313/personal_projects/covid-19-text-updates/</link>
-      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/personal_projects/covid-19-text-updates/</guid>
       <description>A Django-based web app where users can subscribe to COVID-19 text alerts tailored to their state and county. Developed as part of a graduate mobile health course.</description>
+    </item>
+    <item>
+      <title>stock tracker &amp; analyzer 📈</title>
+      <link>http://localhost:1313/personal_projects/stock-analyzer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/personal_projects/stock-analyzer/</guid>
+      <description>A stock tracking web app that analyzes performance and suggests when to buy, sell, or hold.</description>
     </item>
   </channel>
 </rss>

@@ -2,6 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/personal_projects/wordle-helper/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/job-site-scraper/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/wordlist-generator/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/personal-finance-manager/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/covid-19-text-updates/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/stock-analyzer/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/apartment-security-system/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/trailcam-photo-analyzer/</loc>
+  </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2025-10-10T15:09:53-05:00</lastmod>
   </url><url>
@@ -11,78 +27,32 @@
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-10-10T15:09:53-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-06-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/work_projects/tv-pilot/</loc>
-    <lastmod>2025-06-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/web-development/</loc>
-    <lastmod>2025-06-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/work/</loc>
-    <lastmod>2025-06-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/work_projects/</loc>
-    <lastmod>2025-06-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/django/</loc>
-    <lastmod>2022-02-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/personal/</loc>
-    <lastmod>2022-02-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/</loc>
-    <lastmod>2022-02-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/python/</loc>
-    <lastmod>2022-02-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/web-scraping/</loc>
-    <lastmod>2022-02-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/wordle-helper/</loc>
-    <lastmod>2022-02-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/job-site-scraper/</loc>
-    <lastmod>2021-12-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/hacking/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/wordlist-generator/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/persoonal/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/data/</loc>
-    <lastmod>2021-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/stock-analyzer/</loc>
-    <lastmod>2021-08-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/api/</loc>
-    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/covid-19-text-updates/</loc>
-    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/apartment-security-system/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/raspberry-pi/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/javascript/</loc>
-    <lastmod>2015-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/php/</loc>
-    <lastmod>2015-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/personal_projects/trailcam-photo-analyzer/</loc>
-    <lastmod>2015-08-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/data/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/django/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/hacking/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/javascript/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/personal/</loc>
+  </url><url>
+    <loc>http://localhost:1313/personal_projects/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/php/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/python/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/raspberry-pi/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/web-development/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/web-scraping/</loc>
   </url>
 </urlset>

@@ -6,14 +6,6 @@
     <description>Recent content in Work on andrew jacobson</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/work/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>tv show pilot 📺</title>
-      <link>http://localhost:1313/work_projects/tv-pilot/</link>
-      <pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/work_projects/tv-pilot/</guid>
-      <description>A LAMP stack web app that connected a wireless sensor and Raspberry Pi to monitor our apartment&amp;rsquo;s front door and enable alarm notifications.</description>
-    </item>
   </channel>
 </rss>

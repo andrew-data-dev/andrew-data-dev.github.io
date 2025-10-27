@@ -10,7 +10,7 @@ I've worked across multiple industries, with experience spanning corporate, gove
 
 I've included short summaries of personal projects I've worked on, either for fun or as part of my graduate degree. Feel free to ask me about any of them -- when I work on something engaging, challenging, and fun, I easily spend hours hyperfocused on it.
 
-I feel the same way about work projects, but I'm more selective about sharing those details to maintain confidentiality for my previous employers. Regardless, check out my work projects page!
+I feel the same way about work projects, but I'm more selective about sharing those details to maintain confidentiality for my previous employers.
 
 ---
 
