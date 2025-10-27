@@ -19,4 +19,6 @@ Screenshots of the application's main page and detail page are shown below:
 | :--: |
 | *Stock detail* |
 
-I used the **[yfinance Python library](https://github.com/ranaroussi/yfinance)** to pull stock data each morning, which was followed by the analysis to generate buy and sell alerts. My analysis focused on metrics I personally found valuable: tracking how many consecutive days a stock trended in a particular direction, calculating the percentage of its total price change, and comparing its current price against its 52-week high. Whether these metrics were actually valuable indicators is debatable—they were simply my own preferences based on what I thought might be beneficial for making trading decisions.
+I used **[Chart.js](https://www.chartjs.org/)** for the charts -- it's an incredible JavaScript library!
+
+To pull stock data each morning, I used the **[yfinance Python library](https://github.com/ranaroussi/yfinance)**, which was followed by the analysis to generate buy and sell alerts. My analysis focused on metrics I personally found valuable: tracking how many consecutive days a stock trended in a particular direction, calculating the percentage of its total price change, and comparing its current price against its 52-week high. Whether these metrics were actually valuable indicators is debatable—they were simply my own preferences based on what I thought might be beneficial for making trading decisions.

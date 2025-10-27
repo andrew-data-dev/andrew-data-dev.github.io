@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
 <title>personal finance manager 💸 | andrew jacobson</title>
-<meta name="keywords" content="Personal, Python, Hacking">
+<meta name="keywords" content="Personal, Web Development, Django, Python, Data">
 <meta name="description" content="Test">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/personal_projects/personal-finance-manager/">
@@ -133,7 +133,47 @@
 
 </div>
   </header> 
-  <div class="post-content"><p>Built in 2021&hellip;</p>
+  <div class="post-content"><p>In 2021, I built a web app to consolidate our household financial data: account balances, investments, holdings, rideshare spending, and bills with their due dates. I wanted to create a shared dashboard where my wife and I could view our complete financial picture &ndash; comparing assets to debts, tracking our investments, and monitoring trends over time.</p>
+<p>The concept and implementation were relatively straightforward. Each month, I would manually collect the data points and bulk import them into the database. The front end was where the most important work happened, as it needed to clearly represent the aggregated financial data. I used <strong><a href="https://www.chartjs.org/">Chart.js</a></strong> for the line graphs to visualize trends over time. For security reasons, it was hosted locally on our home network.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center"><img alt="home page" loading="lazy" src="/personal_projects/personal-finance-manager/main_page.png"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><em>Home page - these were test numbers/data!</em></td>
+      </tr>
+  </tbody>
+</table>
+<p>Clicking the &ldquo;View Trends&rdquo; button took you to the page shown below. The screenshots only show test data — it was much more impressive with actual production data.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center"><img alt="trends page" loading="lazy" src="/personal_projects/personal-finance-manager/trend_page.png"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><em>Trends page</em></td>
+      </tr>
+  </tbody>
+</table>
+<p>Clicking the &ldquo;Uber/Lyft Trips&rdquo; button took you to the page shown below. This page allowed us to track our rideshare spending. Since we shared one car between the two of us, it was helpful to flag certain trips as commutes.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center"><img alt="rideshare page" loading="lazy" src="/personal_projects/personal-finance-manager/rideshare_page.png"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><em>Rideshare page</em></td>
+      </tr>
+  </tbody>
+</table>
+<p>We used the site regularly for a while, but eventually its use faded. Overall, it was a fun project that combined my personal interest in managing our finances with coding and creating a user-friendly, visually appealing interface.</p>
 
 
   </div>
@@ -141,8 +181,10 @@
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="http://localhost:1313/tags/personal/">Personal</a></li>
+      <li><a href="http://localhost:1313/tags/web-development/">Web Development</a></li>
+      <li><a href="http://localhost:1313/tags/django/">Django</a></li>
       <li><a href="http://localhost:1313/tags/python/">Python</a></li>
-      <li><a href="http://localhost:1313/tags/hacking/">Hacking</a></li>
+      <li><a href="http://localhost:1313/tags/data/">Data</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="http://localhost:1313/personal_projects/wordlist-generator/">
