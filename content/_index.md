@@ -8,7 +8,7 @@ Hi, I'm Andrew -- a database developer passionate about solving unique data chal
 
 I've worked across multiple industries, with experience spanning corporate, government, and higher education sectors.
 
-I've included short summaries of personal projects I've worked on, either for fun or as part of my graduate degree. Feel free to ask me about any of them -- when I work on something engaging, challenging, and fun, I easily spend hours hyperfocused on it.
+I've included short summaries of personal projects I've worked on, either for fun or as part of my graduate degree. Feel free to ask me about any of them -- when I work on something engaging, challenging, and fun, I easily spend hours hyperfocused on it. It's worth noting that all of these projects were built prior to the prevalence of AI tools such as ChatGPT and Claude, so no AI assistance was involved. For any future projects, I will make note of any AI tools used in the development process.
 
 I feel the same way about work projects, but I'm more selective about sharing those details to maintain confidentiality for my previous employers.
 
