@@ -13,6 +13,10 @@ pagerSize = 5
   ShowCodeCopyButtons = true
   ShowPostTags = true
 
+  [params.author]
+    name = "Andrew Jacobson"
+    email = "andrew@andrewjacobson.dev"
+
 [taxonomies]
 
   tags = "tags"
