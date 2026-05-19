@@ -12,6 +12,7 @@ pagerSize = 5
   ShowBreadCrumbs = false
   ShowCodeCopyButtons = true
   ShowPostTags = true
+  hideAuthor = true
 
   [params.author]
     name = "Andrew Jacobson"
